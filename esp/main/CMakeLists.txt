@@ -1,6 +1,7 @@
 set(SOURCES main.cpp 
             servo.cpp 
             trottle.cpp 
-            joystick.cpp)
+            joystick.cpp
+            map.cpp)
 idf_component_register(SRCS ${SOURCES}
                     INCLUDE_DIRS . ../include)
