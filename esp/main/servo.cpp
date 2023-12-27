@@ -6,8 +6,9 @@
 #include "servo.h"
 
 #include "esp_log.h"
+#include "map.h"
 
-static const char *TAG = "example";
+static const char *TAG = "servo";
 
 // Please consult the datasheet of your servo before changing the following parameters
 #define SERVO_MIN_PULSEWIDTH_US 500  // Minimum pulse width in microsecond
@@ -25,6 +26,7 @@ static inline uint32_t example_angle_to_compare(int angle)
 }
 
 Servo::Servo() {
+
     ESP_LOGI(TAG, "Create timer and operator");
     mcpwm_timer_handle_t timer = NULL;
     mcpwm_timer_config_t timer_config = {
@@ -76,35 +78,9 @@ Servo::Servo() {
     ESP_ERROR_CHECK(mcpwm_timer_enable(timer));
     ESP_ERROR_CHECK(mcpwm_timer_start_stop(timer, MCPWM_TIMER_START_NO_STOP));
 }
+
 void Servo::set(int val)
 {
-
-    ESP_LOGI(TAG, "Pulse width=%d", val);
-    ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, val));
+    int steer = map(val, 0, 100, 700, 2300);
+    mcpwm_comparator_set_compare_value(comparator, steer);
 }
-
-//     int angle = 0;
-//     int step = 5;
-
-//     for(int x = 0; x < 1; x++) {
-
-//         ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, 1255));
-//         vTaskDelay(pdMS_TO_TICKS(500));
-//         ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, 2500));
-//         vTaskDelay(pdMS_TO_TICKS(500));
-//         // ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, example_angle_to_compare(-45)));
-//         // vTaskDelay(pdMS_TO_TICKS(2000));
-//     }
-//     ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, example_angle_to_compare(-2)));
-//     // while (1) {
-//     //     printf("Angle of rotation: %d\n", angle);
-//     //     fflush(stdout);
-//     //     ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, example_angle_to_compare(angle)));
-//     //     //Add delay, since it takes time for servo to rotate, usually 200ms/60degree rotation under 5V power supply
-//     //     vTaskDelay(pdMS_TO_TICKS(100));
-//     //     if ((angle + step) > 90 || (angle + step) < -90) {
-//     //         step *= -1;
-//     //     }
-//     //     angle += step;
-//     // }
-// }

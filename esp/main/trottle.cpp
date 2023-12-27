@@ -1,19 +1,18 @@
 #include "trottle.h"
 
 #include <stdio.h>
-#include "driver/ledc.h"
 #include "esp_err.h"
+#include "map.h"
 
 #define LEDC_TIMER              LEDC_TIMER_0
 #define LEDC_MODE               LEDC_LOW_SPEED_MODE
-#define LEDC_OUTPUT_IO          (5) // Define the output GPIO
+#define LEDC_OUTPUT_IO          (4) // Define the output GPIO
 #define LEDC_CHANNEL            LEDC_CHANNEL_1
-#define LEDC_DUTY_RES           LEDC_TIMER_8_BIT // Set duty resolution to 8 bits
-#define LEDC_DUTY               (127) // Set duty to 50%. (2 ** 13) * 50% = 4096
+#define LEDC_DUTY_RES           LEDC_TIMER_16_BIT // Set duty resolution to 8 bits
+#define LEDC_DUTY               (127) // Set duty to 50%. (2 ** 8) * 50% = 127
 #define LEDC_FREQUENCY          (50) // Frequency in Hertz. Set frequency at 4 kHz
 
-
-void Trottle::set(int percentage) {
+Trottle::Trottle() {
 
     // Prepare and then apply the LEDC PWM timer configuration
     ledc_timer_config_t ledc_timer = {
@@ -26,7 +25,7 @@ void Trottle::set(int percentage) {
     ESP_ERROR_CHECK(ledc_timer_config(&ledc_timer));
 
     // Prepare and then apply the LEDC PWM channel configuration
-    ledc_channel_config_t ledc_channel = {
+    ledc_channel = {
         .gpio_num       = LEDC_OUTPUT_IO,
         .speed_mode     = LEDC_MODE,
         .channel        = LEDC_CHANNEL,
@@ -36,4 +35,10 @@ void Trottle::set(int percentage) {
         .hpoint         = 0
     };
     ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel));
+}
+
+void Trottle::set(int percentage) {
+
+    ledc_channel.duty = map(percentage, 0, 100, 3276, 3276 * 2);
+    ledc_channel_config(&ledc_channel);
 }
