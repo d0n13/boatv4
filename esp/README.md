@@ -7,7 +7,7 @@ Source code to control VESC 6 (75/300) and servo along with associated safety
 
 ```
 $ get_idf
-$ idf.py build; idf.py -p /dev/cu.usbserial-0001 flash monitor
+$ clear; idf.py build; idf.py -p /dev/cu.usbserial-0001 flash monitor
 ```
 
 

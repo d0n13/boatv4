@@ -1,4 +1,16 @@
 {
     "idf.adapterTargetName": "esp32",
-    "idf.port": "/dev/cu.usbserial-0001"
+    "idf.port": "/dev/cu.usbserial-0001",
+    "files.associations": {
+        "*.cps": "javascript",
+        "string": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "lv_example_others.h": "c"
+    }
 }

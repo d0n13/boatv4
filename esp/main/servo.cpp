@@ -81,6 +81,11 @@ Servo::Servo() {
 
 void Servo::set(int val)
 {
+    static int oldValue = 0;
+
     int steer = map(val, 0, 100, 700, 2300);
-    mcpwm_comparator_set_compare_value(comparator, steer);
+    if(steer != oldValue) {
+        mcpwm_comparator_set_compare_value(comparator, steer);
+    }
+    oldValue = steer;
 }
