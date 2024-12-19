@@ -1,4 +1,4 @@
-24203148603768826
+24208351564499137
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2400,6 +2400,13 @@ SPDT endstop limit switch vertical hook lever XKB DM1-16UP-1
 0
 3
 3
+Button_Switch_THT
+TS-D015
+
+
+0
+2
+2
 Buzzer_Beeper
 Buzzer_12x9.5RM7.6
 Generic Buzzer, D12mm height 9.5mm with RM7.6mm
@@ -65246,6 +65253,13 @@ LM5146RGYR
 0
 21
 21
+Logos
+QRCode Github Automation
+
+
+0
+0
+0
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -87324,6 +87338,13 @@ Particle P1
 0
 75
 75
+RF_Module
+QRCode Github Automation
+
+
+0
+0
+0
 RF_Module
 RAK811
 RAK811 LPWAN Module https://downloads.rakwireless.com/LoRa/RAK811/Hardware_Specification/RAK811_LoRa_Module_Datasheet_V1.4.pdf
